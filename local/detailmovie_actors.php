@@ -1,14 +1,17 @@
 <?php
-error_reporting(E_ALL | E_PARSE);
-header("Access-Control-Allow-Origin: *");
-$arr = null;
-// koneksi
-$conn = new mysqli("localhost", "root", "", "movies");
-if ($conn->connect_error) {
-	$arr = ["result" => "error", "message" => "unable to connect"];
-	echo json_encode($arr);
-	die();
-}
+require 'connect.php'; ?>
+<?php
+// error_reporting(E_ALL | E_PARSE);
+// header("Access-Control-Allow-Origin: *");
+// $arr = null;
+// // koneksi
+// $conn = new mysqli("localhost", "root", "", "movies");
+// if ($conn->connect_error) {
+// 	$arr = ["result" => "error", "message" => "unable to connect"];
+// 	echo json_encode($arr);
+// 	die();
+// }
+
 // terima data berparameter
 $id = $_POST['id'];
 $sql = "SELECT * FROM movie where movie_id = ? ";
