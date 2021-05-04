@@ -1,13 +1,14 @@
+<?php require 'connect_db_ubaya.php' ?>
 <?php
-error_reporting(E_ALL | E_PARSE);
-header("Access-Control-Allow-Origin: *");
-$arr = null;
-$conn = new mysqli("localhost", "daniel", "ubaya", "movies");
-if ($conn->connect_error) {
-	$arr = ["result" => "error", "message" => "unable to connect"];
-	echo json_encode($arr);
-	die();
-}
+// error_reporting(E_ALL | E_PARSE);
+// header("Access-Control-Allow-Origin: *");
+// $arr = null;
+// $conn = new mysqli("localhost", "daniel", "ubaya", "movies");
+// if ($conn->connect_error) {
+// 	$arr = ["result" => "error", "message" => "unable to connect"];
+// 	echo json_encode($arr);
+// 	die();
+// }
 $id = $_POST['id'];
 $sql = "SELECT * FROM movie where movie_id = ? ";
 $stmt = $conn->prepare($sql);
