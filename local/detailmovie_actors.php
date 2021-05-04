@@ -13,9 +13,10 @@ require 'connect.php'; ?>
 // }
 
 // terima data berparameter
+$id = '';
 $id = $_POST['id'];
 $sql = "SELECT * FROM movie where movie_id = ? ";
-$stmt = $conn->prepare($sql);
+$stmt = $con->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -31,7 +32,7 @@ if ($result->num_rows > 0) {
 		"SELECT genre_name FROM genre inner join 
 	movie_genres on genre.genre_id=movie_genres.genre_id 
 	where movie_id=$id ";
-	$stmt2 = $conn->prepare($sql2);
+	$stmt2 = $con->prepare($sql2);
 	$stmt2->execute();
 	$genres = [];
 	$result2 = $stmt2->get_result();
@@ -55,7 +56,7 @@ if ($result->num_rows > 0) {
 	on movie.movie_id=movie_cast.movie_id
 	where movie.movie_id=$id ";
 
-	$stmt3 = $conn->prepare($sql3);
+	$stmt3 = $con->prepare($sql3);
 	$stmt3->execute();
 	$actors = [];
 	$result3 = $stmt3->get_result();
@@ -76,4 +77,4 @@ if ($result->num_rows > 0) {
 }
 echo json_encode($arr);
 $stmt->close();
-$conn->close();
+$con->close();
