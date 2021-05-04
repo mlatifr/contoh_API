@@ -4,7 +4,7 @@
 
 extract($_POST);
 $sql = "INSERT INTO movie(title,homepage,overview,release_date)
-VALUES(?,?,?,?)";
+    VALUES(?,?,?,?)";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("ssss", $title, $homepage, $overview, $release_date);
 $stmt->execute();
