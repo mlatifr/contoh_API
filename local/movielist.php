@@ -1,10 +1,12 @@
 <?php
+error_reporting(E_ALL | E_PARSE);
 header("Access-Control-Allow-Origin: *");
 $arr = null;
-$con = '';
-$con = new mysqli("localhost", "root", "", "movies");
-if ($con->connect_error) {
+$conn = new mysqli("localhost", "root", "", "movies");
+if ($conn->connect_error) {
     $arr = ["result" => "error", "message" => "unable to connect"];
+    echo json_encode($arr);
+    die();
 }
 $cari = "%{$_POST['cari']}%";
 $sql = "SELECT * FROM movie where title like ? ";
