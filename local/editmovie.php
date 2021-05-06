@@ -3,33 +3,40 @@
 <?php
 // terima data berparameter
 $id = '';
-$title= '';
-$homepage= '';
-$overview= '';
-$release_date= '';
-$id = $_POST['id'];
-$title= $_POST['title'];
-$homepage= $_POST['homepage'];
-$overview= $_POST['overview'];
-$release_date= $_POST['release_date'];
+$title = '';
+$homepage = '';
+$overview = '';
+$release_date = '';
+$id = $_POST['movie_id'];
+$title = $_POST['title'];
+$homepage = $_POST['homepage'];
+$overview = $_POST['overview'];
+$release_date = $_POST['release_date'];
+// echo ($id . "<br>" . $title . "<br>" .
+//     $homepage . "<br>" .
+//     $overview . "<br>" .
+//     $release_date . "<br>");
+$sql = "UPDATE `movie` SET 
+`title` = '$title',
+ `homepage` = '$homepage', 
+ `overview` = '$overview', 
+ `release_date` = '$release_date' 
+ WHERE `movie`.`movie_id` = '$id'";
 
-$sql ="UPDATE `movie` SET `title` = ?, `homepage` = ?, `overview` = ?, `release_date` = ? WHERE `movie`.`movie_id` = ?";
+$stmt = $con->query($sql);
 
-/*$sql = "SELECT title,homepage,overview,release_date FROM `movie` where movie_id = ? ";*/
-$stmt = $con->prepare($sql);
-$stmt->bind_param("issss", $id,$title,$homepage,$overview,$release_date);
-$stmt->execute();
-$result = $stmt->get_result();
+$result = $stmt;
 $data = [];
-if ($result->num_rows > 0) {
-    while ($r = mysqli_fetch_assoc($result)) {
-        array_push($data, $r);
-    }
+// printf(" \n Affected rows (UPDATE): %d\n", $con->affected_rows . '\n');
+if ($con->affected_rows > 0) {
+    $r = 'success';
+    array_push($data, $r);
     $arr = ["result" => "success", "data" => $data];
 } else {
     $arr = ["result" => "error", "message" => "sql error: $sql"];
 }
+// echo ('<br><br><br>');
 echo json_encode($arr);
-$stmt->close();
+// $stmt->close();
 $con->close();
 ?>
