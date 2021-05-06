@@ -10,7 +10,7 @@ $release_date = '';
 $id = $_POST['movie_id'];
 $title = $_POST['title'];
 $homepage = $_POST['homepage'];
-$overview = $_POST['overview'];
+$overview = addslashes($_POST['overview']);
 $release_date = $_POST['release_date'];
 // echo ($id . "<br>" . $title . "<br>" .
 //     $homepage . "<br>" .
@@ -37,6 +37,7 @@ if ($con->affected_rows > 0) {
 }
 // echo ('<br><br><br>');
 echo json_encode($arr);
+// print('<br>' . $sql);
 // $stmt->close();
 $con->close();
 ?>
