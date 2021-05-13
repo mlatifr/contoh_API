@@ -17,11 +17,11 @@ $release_date = $_POST['release_date'];
 //     $overview . "<br>" .
 //     $release_date . "<br>");
 $sql = "UPDATE `movie` SET 
-`title` = '$title',
- `homepage` = '$homepage', 
- `overview` = '$overview', 
- `release_date` = '$release_date' 
- WHERE `movie`.`movie_id` = '$id'";
+`title` ='$title',
+ `homepage` ='$homepage', 
+ `overview` ='$overview', 
+ `release_date` ='$release_date' 
+ WHERE `movie`.`movie_id` ='$id'";
 
 $stmt = $con->query($sql);
 
