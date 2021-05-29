@@ -2,16 +2,16 @@
 error_reporting(E_ALL | E_PARSE);
 header("Access-Control-Allow-Origin: *");
 $arr = null;
-$conn = new mysqli("localhost", "root", "", "movies");
+$conn = new mysqli("13.76.91.251", "root", "", "movies");
 if ($conn->connect_error) {
 	$arr = ["result" => "error", "message" => "unable to connect"];
 	echo json_encode($arr);
 	die();
 }
 extract($_POST);
-$sql = "SELECT * FROM master_user where user_name=? and user_password=?";
+$sql = "SELECT * FROM master_user where user_id=? and user_password=?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $user_name, $user_password);
+$stmt->bind_param("ss", $user_id, $user_password);
 $stmt->execute();
 $result = $stmt->get_result();
 if ($result->num_rows > 0) {
@@ -21,8 +21,5 @@ if ($result->num_rows > 0) {
 	$arr = ["result" => "error", "message" => "sql error: $sql"];
 }
 echo json_encode($arr);
-// echo('____________');
-// echo ($user_name);
-// echo ($user_password);
 $stmt->close();
 $conn->close();
