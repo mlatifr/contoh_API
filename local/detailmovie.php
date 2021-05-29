@@ -1,4 +1,4 @@
-<?php require 'connect_db_ubaya.php' ?>
+<?php require 'connect.php' ?>
 <?php
 // error_reporting(E_ALL | E_PARSE);
 // header("Access-Control-Allow-Origin: *");
