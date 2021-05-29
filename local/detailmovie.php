@@ -11,7 +11,7 @@
 // }
 $id = $_POST['id'];
 $sql = "SELECT * FROM movie where movie_id = ? ";
-$stmt = $conn->prepare($sql);
+$stmt = $con->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
