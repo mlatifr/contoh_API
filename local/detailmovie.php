@@ -21,7 +21,7 @@ if ($result->num_rows > 0) {
 		"SELECT genre_name FROM genre inner join 
 	movie_genres on genre.genre_id=movie_genres.genre_id 
 	where movie_id=$id ";
-	$stmt2 = $conn->prepare($sql2);
+	$stmt2 = $con->prepare($sql2);
 	$stmt2->execute();
 	$genres = [];
 	$result2 = $stmt2->get_result();
