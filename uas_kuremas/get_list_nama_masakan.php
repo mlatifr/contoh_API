@@ -2,11 +2,11 @@
 header("Access-Control-Allow-Origin: *");
 $arr = null;
 $con = '';
-$con = new mysqli("localhost", "root", "", "movies");
+$con = new mysqli("localhost", "root", "", "kuremas");
 if ($con->connect_error) {
     $arr = ["result" => "error", "message" => "unable to connect"];
 }
-$sql = "SELECT * FROM person ";
+$sql = "SELECT * FROM masakan ";
 $stmt = $con->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
