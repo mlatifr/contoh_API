@@ -3,10 +3,10 @@
 <?php
 
 extract($_POST);
-$sql = "INSERT INTO movie(title,homepage,overview,release_date)
-    VALUES(?,?,?,?)";
+$sql = "INSERT INTO masakan(nama,url_foto)
+    VALUES(?,?)";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("ssss", $title, $homepage, $overview, $release_date);
+$stmt->bind_param("ss", $nama_masakan, $url_foto);
 $stmt->execute();
 if ($stmt->affected_rows > 0) {
     $arr = ["result" => "success", "id" => $con->insert_id];
