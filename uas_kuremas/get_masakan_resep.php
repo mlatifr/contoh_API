@@ -6,8 +6,11 @@ $con = new mysqli("localhost", "root", "", "kuremas");
 if ($con->connect_error) {
     $arr = ["result" => "error", "message" => "unable to connect"];
 }
-$sql = "SELECT * FROM resep where masakan_id =1 ";
+extract($_POST);
+$sql = "SELECT * FROM resep where masakan_id=?";
 $stmt = $con->prepare($sql);
+$stmt->bind_param("s", $id_masakan);
+
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
