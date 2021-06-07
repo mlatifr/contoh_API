@@ -6,8 +6,13 @@ $con = new mysqli("localhost", "root", "", "kuremas");
 if ($con->connect_error) {
     $arr = ["result" => "error", "message" => "unable to connect"];
 }
-$sql = "SELECT * FROM `masakan` INNER join resep ON masakan.id=resep.masakan_id";
+$cari="%{$_POST['cari']}%";
+$sql = "SELECT * FROM `masakan` 
+INNER join resep 
+ON masakan.id=resep.masakan_id
+WHERE masakan.nama like ?";
 $stmt = $con->prepare($sql);
+$stmt->bind_param("s",$cari);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
@@ -20,5 +25,6 @@ if ($result->num_rows > 0) {
     $arr = ["result" => "error", "message" => "sql error: $sql"];
 }
 echo json_encode($arr);
+// echo($cari);
 $stmt->close();
 $con->close();
