@@ -13,7 +13,7 @@ if (file_put_contents("images/" . $nama_masakan . ".jpg", $img)) {
     $stmt->bind_param("ss", $nama_masakan, $imgLocation);
     $stmt->execute();
     if ($stmt->affected_rows > 0) {
-        $arr = ["result" => "success", "imgLocation" => $imgLocation];
+        $arr = ["result" => "success", 'id_masakan_baru' => $con->insert_id, "imgLocation" => $imgLocation];
     } else {
         $arr = ["result" => "fail", "Error" => $con->error];
     }
