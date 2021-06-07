@@ -10,9 +10,9 @@ $cari="%{$_POST['cari']}%";
 $sql = "SELECT * FROM `masakan` 
 INNER join resep 
 ON masakan.id=resep.masakan_id
-WHERE  resep.bahan like ?";
+WHERE  resep.bahan like ?  or masakan.nama like ?";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("s",$cari);
+$stmt->bind_param("ss",$cari,$cari);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
