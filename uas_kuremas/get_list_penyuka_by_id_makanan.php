@@ -7,13 +7,10 @@ if ($con->connect_error) {
     $arr = ["result" => "error", "message" => "unable to connect"];
 }
 extract($_POST);
-$sql = "SELECT resep_masakan_id,user_id_komentar,komentar_id,komentar FROM `resep_has_komentar` inner JOIN resep 
-on resep.masakan_id=resep_has_komentar.resep_masakan_id
-INNER JOIN komentar
-on komentar.id=resep_has_komentar.komentar_id
-where resep.masakan_id=?";
+$sql = "SELECT * FROM `resep_has_like`
+where resep_masakan_id = ?";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("s", $id);
+$stmt->bind_param("s", $resep_masakan_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = [];
@@ -26,6 +23,5 @@ if ($result->num_rows > 0) {
     $arr = ["result" => "error", "message" => "sql error: $sql"];
 }
 echo json_encode($arr);
-// echo($id);
 $stmt->close();
 $con->close();
