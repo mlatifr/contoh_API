@@ -6,7 +6,7 @@ $nama_masakan = $_POST['nama_masakan'];
 $img = base64_decode($_POST['img']);
 if (file_put_contents("images/" . $nama_masakan . ".jpg", $img)) {
     // echo "Sukses upload file";
-    $imgLocation = "http://mlatifr.ddns.net/emertech/uas_kuremas/images/" . $nama_masakan . ".jpg";
+    $imgLocation = "http:/192.168.1.7/emertech/uas_kuremas/images/" . $nama_masakan . ".jpg";
     $sql = "INSERT INTO masakan(nama,url_foto)
     VALUES(?,?)";
     $stmt = $con->prepare($sql);
